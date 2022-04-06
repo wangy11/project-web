@@ -11,7 +11,7 @@
         <el-input v-model="formdata.username"></el-input>
       </el-form-item>
       <el-form-item label="密码">
-        <el-input v-model="formdata.password"></el-input>
+        <el-input type="password" v-model="formdata.password"></el-input>
       </el-form-item>
       <el-button @click.prevent="handleLogin()" class="login-btn" type="primary"
         >登录</el-button
@@ -32,26 +32,26 @@ export default {
   },
   methods: {
     //登录请求
-    // async handleLogin() {
-    //   const res = await this.$http.post("login", this.formdata);
-    //   // console.log(res);
-    //   const {
-    //     data,
-    //     meta: { msg, status },
-    //   } = res.data;
-    //   if (status === 200) {
-    // localStorage.setItem('token',data.token)
-    //     this.$router.push({ name: "home" });
-    //     this.$message.success(msg);
-    //   } else {
-    //     this.$message.watning(msg);
-    //   }
-    // },
-    handleLogin() {
-      localStorage.setItem("token", 123);
-      this.$router.push({ name: "home" });
-      this.$message.success("登录成功");
+    async handleLogin() {
+      const res = await this.$http.post("login", this.formdata);
+      console.log(res);
+      const {
+        data,
+        meta: { msg, status },
+      } = res.data;
+      if (status === 200) {
+        localStorage.setItem("token", data.token);
+        this.$router.push({ name: "home" });
+        this.$message.success(msg);
+      } else {
+        this.$message.warning(msg);
+      }
     },
+    // handleLogin() {
+    //   localStorage.setItem("token", 123);
+    //   this.$router.push({ name: "home" });
+    //   this.$message.success("登录成功");
+    // },
   },
 };
 </script>
