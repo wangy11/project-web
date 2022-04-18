@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
+import MyBread from '@/components/cuscom/myBread.vue'
 import router from './router'
 import MyServerHttp from '@/plugins/http.js'
 import moment from 'moment'
@@ -21,6 +22,8 @@ Vue.config.productionTip = false
 Vue.filter('fmtdata', (v) => {
     return moment(v).format('YYYY-MM-DD')
 })
+
+Vue.component(MyBread.name, MyBread)
 
 /* eslint-disable no-new */
 new Vue({
